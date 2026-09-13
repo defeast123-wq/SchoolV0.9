@@ -302,7 +302,7 @@ html,body{
     justify-content:center;
     gap:14px;
     margin-top:285px;
-    transform:translateX(-85px);
+    transform:translateX(0);
 }
 
 .school-button{
@@ -337,6 +337,151 @@ html,body{
         transform .2s ease,
         border-color .2s ease,
         box-shadow .2s ease;
+}
+
+
+/* =========================
+   SETTINGS BUTTON + WINDOW
+========================= */
+.settings-button .button-icon svg{width:19px;height:19px;}
+
+#settingsBackdrop{
+    position:fixed;
+    inset:0;
+    z-index:9990;
+    display:none;
+    background:rgba(0,0,0,.28);
+    backdrop-filter:blur(2px);
+}
+#settingsBackdrop.active{display:block;}
+
+#settingsWindow{
+    position:fixed;
+    z-index:9991;
+    top:50%;
+    left:50%;
+    width:min(760px,92vw);
+    height:min(650px,82vh);
+    transform:translate(-50%,-50%);
+    display:none;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:18px;
+    background:rgba(12,12,15,.96);
+    color:white;
+    box-shadow:0 30px 100px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+}
+#settingsWindow.active{display:flex;flex-direction:column;}
+
+.settings-titlebar{
+    height:58px;
+    min-height:58px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 14px 0 18px;
+    border-bottom:1px solid rgba(255,255,255,.09);
+    background:rgba(255,255,255,.035);
+    cursor:grab;
+    user-select:none;
+}
+.settings-titlebar:active{cursor:grabbing;}
+.settings-titlebar h2{font-size:15px;letter-spacing:.04em;flex:1;}
+.settings-titlebar small{font-size:11px;color:rgba(255,255,255,.38);}
+.settings-window-close{
+    width:32px;height:32px;border:1px solid rgba(255,255,255,.09);border-radius:8px;
+    background:rgba(255,255,255,.05);color:white;cursor:pointer;font-size:18px;
+}
+.settings-window-close:hover{background:rgba(255,70,70,.22);}
+
+.settings-body{display:flex;min-height:0;flex:1;}
+.settings-nav{
+    width:180px;min-width:180px;padding:12px;border-right:1px solid rgba(255,255,255,.08);
+    overflow:auto;
+}
+.settings-nav button{
+    width:100%;padding:11px 12px;margin-bottom:6px;border:1px solid transparent;border-radius:10px;
+    background:transparent;color:rgba(255,255,255,.55);text-align:left;font-family:inherit;font-size:12px;
+    cursor:pointer;
+}
+.settings-nav button:hover,.settings-nav button.active{background:rgba(255,255,255,.08);color:white;border-color:rgba(255,255,255,.08);}
+.settings-content{flex:1;overflow:auto;padding:22px;}
+.settings-section{display:none;}
+.settings-section.active{display:block;}
+.settings-section h3{font-size:20px;margin-bottom:6px;}
+.settings-section>p{font-size:12px;color:rgba(255,255,255,.48);margin-bottom:18px;line-height:1.5;}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.settings-card{
+    padding:14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:rgba(255,255,255,.035);
+}
+.settings-card label{display:block;font-size:12px;font-weight:600;margin-bottom:8px;}
+.settings-card select,.settings-card input,.settings-card textarea{
+    width:100%;border:1px solid rgba(255,255,255,.11);border-radius:8px;background:#09090b;color:white;
+    padding:9px 10px;font-family:inherit;font-size:12px;outline:none;
+}
+.settings-card textarea{min-height:90px;resize:vertical;}
+.settings-card select:focus,.settings-card input:focus,.settings-card textarea:focus{border-color:rgba(255,255,255,.32);}
+.settings-toggle{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.settings-toggle:last-child{border-bottom:0;}
+.settings-toggle span{font-size:12px;}
+.settings-toggle small{display:block;color:rgba(255,255,255,.38);font-size:10px;margin-top:3px;}
+.switch{position:relative;width:42px;height:24px;flex:0 0 auto;}
+.switch input{opacity:0;width:0;height:0;}
+.slider{position:absolute;inset:0;border-radius:20px;background:#29292d;cursor:pointer;transition:.2s;}
+.slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:#aaa;transition:.2s;}
+.switch input:checked+.slider{background:#eee;}
+.switch input:checked+.slider:before{transform:translateX(18px);background:#111;}
+.theme-preview{height:70px;border-radius:10px;margin-bottom:9px;border:1px solid rgba(255,255,255,.08);}
+.preview-dark{background:linear-gradient(135deg,#050505,#25252a);}
+.preview-light{background:linear-gradient(135deg,#f4f4f4,#bdbdbd);}
+.preview-purple{background:linear-gradient(135deg,#09050f,#6f38a5);}
+.preview-ocean{background:linear-gradient(135deg,#031015,#137b91);}
+.preview-forest{background:linear-gradient(135deg,#04100a,#2c7947);}
+.preview-sunset{background:linear-gradient(135deg,#160708,#b34c32);}
+.preview-cyber{background:linear-gradient(135deg,#02050b,#1e4e83);}
+.preview-rose{background:linear-gradient(135deg,#10060b,#9d3d70);}
+.theme-button{cursor:pointer;border:1px solid rgba(255,255,255,.08);background:transparent;color:white;border-radius:10px;padding:10px;text-align:left;font-family:inherit;}
+.theme-button:hover{border-color:rgba(255,255,255,.25);}
+.theme-button strong{font-size:12px;display:block;}.theme-button small{font-size:10px;color:rgba(255,255,255,.4);}
+.cursor-choice{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:10px;cursor:pointer;background:rgba(255,255,255,.025);}
+.cursor-choice:hover,.cursor-choice.selected{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);}
+.cursor-preview{width:24px;height:24px;border:1px solid rgba(255,255,255,.5);border-radius:50%;position:relative;flex:0 0 auto;}
+.cursor-preview.dot:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:white;left:7px;top:7px;}
+.cursor-preview.cross:before,.cursor-preview.cross:after{content:"";position:absolute;background:white;left:11px;top:3px;width:1px;height:18px;}.cursor-preview.cross:after{transform:rotate(90deg);}
+.cursor-preview.ring{box-shadow:0 0 10px rgba(255,255,255,.55);}
+.cursor-preview.none{border:0;}.cursor-preview.none:after{content:"↖";font-size:21px;position:absolute;left:3px;top:-1px;color:white;}
+.mod-list{margin-top:12px;display:grid;gap:8px;}.mod-item{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid rgba(255,255,255,.08);border-radius:9px;background:rgba(255,255,255,.025);}.mod-item span{flex:1;font-size:11px;}.danger-btn,.settings-action{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:white;border-radius:8px;padding:9px 12px;cursor:pointer;font-family:inherit;font-size:11px;}.danger-btn:hover{background:rgba(255,70,70,.18);}.settings-action:hover{background:rgba(255,255,255,.11);}
+
+body[data-theme="light"]{background:#ececec;color:#111;}
+body[data-theme="light"] .bg-video{display:none;} body[data-theme="light"] .overlay{background:radial-gradient(circle at center,rgba(255,255,255,.1),rgba(220,220,220,.72));}
+body[data-theme="light"] .browser-bar{background:rgba(235,235,238,.94);color:#111;} body[data-theme="light"] .browser-tab{color:rgba(0,0,0,.5);} body[data-theme="light"] .browser-tab:hover,body[data-theme="light"] .browser-tab.active{color:#111;background:rgba(0,0,0,.06);}
+body[data-theme="light"] .school-button{background:rgba(255,255,255,.72);color:#111;border-color:rgba(0,0,0,.12);}
+body[data-theme="light"] #settingsWindow{background:rgba(248,248,250,.97);color:#111;} body[data-theme="light"] .settings-titlebar{background:rgba(0,0,0,.035);}
+body[data-theme="light"] .settings-nav{border-color:rgba(0,0,0,.08);} body[data-theme="light"] .settings-nav button{color:rgba(0,0,0,.55);} body[data-theme="light"] .settings-nav button:hover,body[data-theme="light"] .settings-nav button.active{color:#111;background:rgba(0,0,0,.07);}
+body[data-theme="light"] .settings-card,body[data-theme="light"] .mod-item{border-color:rgba(0,0,0,.1);background:rgba(0,0,0,.025);} body[data-theme="light"] .settings-card select,body[data-theme="light"] .settings-card input,body[data-theme="light"] .settings-card textarea{background:#fff;color:#111;border-color:rgba(0,0,0,.15);}
+body[data-theme="purple"] .school-button{background:linear-gradient(135deg,rgba(170,90,255,.24),rgba(70,25,100,.16));border-color:rgba(190,120,255,.35);}
+body[data-theme="ocean"] .school-button{background:linear-gradient(135deg,rgba(40,190,220,.22),rgba(5,50,70,.15));border-color:rgba(70,220,240,.3);}
+body[data-theme="forest"] .school-button{background:linear-gradient(135deg,rgba(50,190,100,.22),rgba(10,65,30,.15));border-color:rgba(80,220,120,.3);}
+body[data-theme="sunset"] .school-button{background:linear-gradient(135deg,rgba(255,100,70,.23),rgba(90,15,20,.15));border-color:rgba(255,120,90,.3);}
+body[data-theme="cyber"] .school-button{background:linear-gradient(135deg,rgba(50,130,255,.22),rgba(10,25,65,.15));border-color:rgba(80,160,255,.35);}
+body[data-theme="rose"] .school-button{background:linear-gradient(135deg,rgba(230,80,150,.22),rgba(80,15,55,.15));border-color:rgba(255,100,180,.3);}
+
+#customCursor{position:fixed;z-index:10000;pointer-events:none;display:none;transform:translate(-50%,-50%);}
+body.cursor-dot #customCursor,body.cursor-ring #customCursor,body.cursor-cross #customCursor{display:block;}
+body.cursor-dot #customCursor{width:8px;height:8px;border-radius:50%;background:white;box-shadow:0 0 12px rgba(255,255,255,.8);}
+body.cursor-ring #customCursor{width:22px;height:22px;border:1px solid white;border-radius:50%;box-shadow:0 0 13px rgba(255,255,255,.6);}
+body.cursor-cross #customCursor{width:22px;height:22px;}
+body.cursor-cross #customCursor:before,body.cursor-cross #customCursor:after{content:"";position:absolute;background:white;left:10px;top:0;width:1px;height:22px;}body.cursor-cross #customCursor:after{transform:rotate(90deg);}
+body.cursor-dot,body.cursor-ring,body.cursor-cross{cursor:none;}body.cursor-dot * ,body.cursor-ring *,body.cursor-cross *{cursor:none !important;}
+
+@media(max-width:650px){
+  #settingsWindow{width:96vw;height:88vh;}
+  .settings-nav{width:125px;min-width:125px;}
+  .settings-grid{grid-template-columns:1fr;}
 }
 
 .school-button::before{
@@ -1868,9 +2013,111 @@ html,body{
 
         </button>
 
+        <button class="school-button settings-button" id="settingsButton" type="button">
+            <span class="button-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/>
+                    <path d="M19 13.2a7.3 7.3 0 0 0 0-2.4l2-1.5-2-3.4-2.4 1a7.2 7.2 0 0 0-2.1-1.2L14.2 3h-4.4l-.3 2.7a7.2 7.2 0 0 0-2.1 1.2l-2.4-1-2 3.4 2 1.5a7.3 7.3 0 0 0 0 2.4l-2 1.5 2 3.4 2.4-1a7.2 7.2 0 0 0 2.1 1.2l.3 2.7h4.4l.3-2.7a7.2 7.2 0 0 0 2.1-1.2l2.4 1 2-3.4-2-1.5z"/>
+                </svg>
+            </span>
+            <span class="button-text">SETTINGS</span>
+        </button>
+
     </div>
 
 </section>
+
+<!-- =========================
+     SETTINGS WINDOW
+========================= -->
+<div id="settingsBackdrop"></div>
+<div id="settingsWindow" aria-hidden="true">
+    <div class="settings-titlebar" id="settingsTitlebar">
+        <h2>Schooly Settings</h2>
+        <small>drag to move</small>
+        <button class="settings-window-close" id="settingsClose" type="button" aria-label="Close settings">×</button>
+    </div>
+    <div class="settings-body">
+        <nav class="settings-nav">
+            <button class="active" data-settings-section="appearance">Appearance</button>
+            <button data-settings-section="cursor">Custom Cursor</button>
+            <button data-settings-section="mods">Mods</button>
+            <button data-settings-section="behavior">Behavior</button>
+            <button data-settings-section="games">Games</button>
+            <button data-settings-section="advanced">Advanced</button>
+        </nav>
+        <main class="settings-content">
+            <section class="settings-section active" id="settings-appearance">
+                <h3>Themes</h3>
+                <p>Pick a look for Schooly. Your choice is saved automatically.</p>
+                <div class="settings-grid">
+                    <button class="theme-button" data-theme-choice="dark"><div class="theme-preview preview-dark"></div><strong>Midnight</strong><small>Classic black & white</small></button>
+                    <button class="theme-button" data-theme-choice="light"><div class="theme-preview preview-light"></div><strong>Light</strong><small>Clean bright interface</small></button>
+                    <button class="theme-button" data-theme-choice="purple"><div class="theme-preview preview-purple"></div><strong>Royal Purple</strong><small>Deep purple glow</small></button>
+                    <button class="theme-button" data-theme-choice="ocean"><div class="theme-preview preview-ocean"></div><strong>Ocean</strong><small>Cool blue interface</small></button>
+                    <button class="theme-button" data-theme-choice="forest"><div class="theme-preview preview-forest"></div><strong>Forest</strong><small>Green night theme</small></button>
+                    <button class="theme-button" data-theme-choice="sunset"><div class="theme-preview preview-sunset"></div><strong>Sunset</strong><small>Warm orange/red</small></button>
+                    <button class="theme-button" data-theme-choice="cyber"><div class="theme-preview preview-cyber"></div><strong>Cyber</strong><small>Electric blue</small></button>
+                    <button class="theme-button" data-theme-choice="rose"><div class="theme-preview preview-rose"></div><strong>Rose</strong><small>Pink neon</small></button>
+                </div>
+            </section>
+
+            <section class="settings-section" id="settings-cursor">
+                <h3>Custom Cursor</h3>
+                <p>Change the pointer style. The cursor is only visual and can be switched back anytime.</p>
+                <div class="settings-grid">
+                    <div class="cursor-choice" data-cursor-choice="default"><div class="cursor-preview none"></div><div><strong>Default</strong><small>Normal system pointer</small></div></div>
+                    <div class="cursor-choice" data-cursor-choice="dot"><div class="cursor-preview dot"></div><div><strong>Glow Dot</strong><small>Small glowing pointer</small></div></div>
+                    <div class="cursor-choice" data-cursor-choice="ring"><div class="cursor-preview ring"></div><div><strong>Neon Ring</strong><small>Clean ring pointer</small></div></div>
+                    <div class="cursor-choice" data-cursor-choice="cross"><div class="cursor-preview cross"></div><div><strong>Crosshair</strong><small>Minimal cross pointer</small></div></div>
+                </div>
+            </section>
+
+            <section class="settings-section" id="settings-mods">
+                <h3>Mods</h3>
+                <p>Add your own saved CSS mods. These mods stay on this browser and do not execute JavaScript.</p>
+                <div class="settings-card">
+                    <label for="modName">Mod name</label>
+                    <input id="modName" placeholder="My custom mod">
+                    <label for="modCss" style="margin-top:12px">CSS code</label>
+                    <textarea id="modCss" placeholder=".school-button { border-radius: 4px; }"></textarea>
+                    <button class="settings-action" id="addModButton" style="margin-top:10px">＋ Add mod</button>
+                </div>
+                <div class="mod-list" id="modList"></div>
+            </section>
+
+            <section class="settings-section" id="settings-behavior">
+                <h3>Behavior</h3>
+                <p>Control animations and interface behavior.</p>
+                <div class="settings-card">
+                    <div class="settings-toggle"><span>Particle background<small>Show the animated Schooly particles.</small></span><label class="switch"><input type="checkbox" id="particlesToggle" checked><span class="slider"></span></label></div>
+                    <div class="settings-toggle"><span>Button glow effects<small>Keep the mouse lighting effect on home buttons.</small></span><label class="switch"><input type="checkbox" id="glowToggle" checked><span class="slider"></span></label></div>
+                    <div class="settings-toggle"><span>Reduced motion<small>Reduce UI transitions and animations.</small></span><label class="switch"><input type="checkbox" id="motionToggle"><span class="slider"></span></label></div>
+                    <div class="settings-toggle"><span>Remember last page<small>Return to the last selected tab after refresh.</small></span><label class="switch"><input type="checkbox" id="rememberPageToggle"><span class="slider"></span></label></div>
+                </div>
+            </section>
+
+            <section class="settings-section" id="settings-games">
+                <h3>Games</h3>
+                <p>Extra controls for the Schooly game launcher.</p>
+                <div class="settings-card">
+                    <div class="settings-toggle"><span>Open games in fullscreen<small>Try fullscreen automatically when a game opens.</small></span><label class="switch"><input type="checkbox" id="gameFullscreenToggle"><span class="slider"></span></label></div>
+                    <div class="settings-toggle"><span>Confirm game launch<small>Ask before opening a game.</small></span><label class="switch"><input type="checkbox" id="gameConfirmToggle"><span class="slider"></span></label></div>
+                </div>
+            </section>
+
+            <section class="settings-section" id="settings-advanced">
+                <h3>Advanced</h3>
+                <p>Reset local Schooly preferences stored by this page.</p>
+                <div class="settings-card">
+                    <button class="danger-btn" id="resetSettingsButton">Reset all Schooly settings</button>
+                    <p style="margin:10px 0 0">This resets themes, cursor choice, toggles, and saved CSS mods.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+<div id="customCursor"></div>
 
 <!-- =========================
      GAMES PAGE
@@ -2659,6 +2906,123 @@ document
 });
 
 /* =========================================================
+   SETTINGS SYSTEM
+========================================================= */
+const settingsButton = document.getElementById("settingsButton");
+const settingsWindow = document.getElementById("settingsWindow");
+const settingsBackdrop = document.getElementById("settingsBackdrop");
+const settingsClose = document.getElementById("settingsClose");
+const settingsTitlebar = document.getElementById("settingsTitlebar");
+const customCursor = document.getElementById("customCursor");
+
+const SETTINGS_KEY = "schoolySettingsV2";
+let savedSettings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "null") || {
+    theme:"dark", cursor:"default", particles:true, glow:true, reducedMotion:false,
+    rememberPage:false, gameFullscreen:false, gameConfirm:false, mods:[]
+};
+
+function saveSettings(){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(savedSettings)); }
+function applyTheme(theme){
+    savedSettings.theme = theme;
+    document.body.dataset.theme = theme === "dark" ? "" : theme;
+    saveSettings();
+}
+function applyCursor(cursor){
+    document.body.classList.remove("cursor-dot","cursor-ring","cursor-cross");
+    if(cursor !== "default") document.body.classList.add("cursor-"+cursor);
+    savedSettings.cursor = cursor;
+    saveSettings();
+}
+function applyBehavior(){
+    const canvas = document.getElementById("particleCanvas");
+    if(canvas) canvas.style.display = savedSettings.particles ? "block" : "none";
+    document.body.classList.toggle("reduced-motion", !!savedSettings.reducedMotion);
+    const styleId = "schooly-settings-style";
+    let style = document.getElementById(styleId);
+    if(!style){ style=document.createElement("style"); style.id=styleId; document.head.appendChild(style); }
+    style.textContent = savedSettings.glow ? "" : ".school-button::before{display:none!important;} .school-button:hover{transform:none!important;}";
+}
+function syncSettingsUI(){
+    document.querySelectorAll("[data-theme-choice]").forEach(b=>b.style.outline = b.dataset.themeChoice===savedSettings.theme ? "1px solid rgba(255,255,255,.55)" : "none");
+    document.querySelectorAll("[data-cursor-choice]").forEach(b=>b.classList.toggle("selected", b.dataset.cursorChoice===savedSettings.cursor));
+    const map={particlesToggle:"particles",glowToggle:"glow",motionToggle:"reducedMotion",rememberPageToggle:"rememberPage",gameFullscreenToggle:"gameFullscreen",gameConfirmToggle:"gameConfirm"};
+    Object.entries(map).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.checked=!!savedSettings[key];});
+}
+function openSettings(){
+    settingsWindow.classList.add("active"); settingsBackdrop.classList.add("active"); settingsWindow.setAttribute("aria-hidden","false");
+    syncSettingsUI(); renderMods();
+}
+function closeSettings(){
+    settingsWindow.classList.remove("active"); settingsBackdrop.classList.remove("active"); settingsWindow.setAttribute("aria-hidden","true");
+}
+settingsButton.addEventListener("click", openSettings); settingsClose.addEventListener("click", closeSettings); settingsBackdrop.addEventListener("click", closeSettings);
+
+document.querySelectorAll("[data-settings-section]").forEach(btn=>btn.addEventListener("click",()=>{
+    document.querySelectorAll(".settings-nav button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".settings-section").forEach(s=>s.classList.remove("active"));
+    btn.classList.add("active"); document.getElementById("settings-"+btn.dataset.settingsSection).classList.add("active");
+}));
+
+document.querySelectorAll("[data-theme-choice]").forEach(btn=>btn.addEventListener("click",()=>{applyTheme(btn.dataset.themeChoice);syncSettingsUI();}));
+document.querySelectorAll("[data-cursor-choice]").forEach(btn=>btn.addEventListener("click",()=>{applyCursor(btn.dataset.cursorChoice);syncSettingsUI();}));
+
+["particlesToggle","glowToggle","motionToggle","rememberPageToggle","gameFullscreenToggle","gameConfirmToggle"].forEach(id=>{
+    const el=document.getElementById(id); el.addEventListener("change",()=>{
+        const key={particlesToggle:"particles",glowToggle:"glow",motionToggle:"reducedMotion",rememberPageToggle:"rememberPage",gameFullscreenToggle:"gameFullscreen",gameConfirmToggle:"gameConfirm"}[id];
+        savedSettings[key]=el.checked; saveSettings(); applyBehavior();
+    });
+});
+
+function renderMods(){
+    const list=document.getElementById("modList"); list.innerHTML="";
+    if(!savedSettings.mods.length){ list.innerHTML='<div class="mod-item"><span>No mods added yet.</span></div>'; return; }
+    savedSettings.mods.forEach((mod,index)=>{
+        const row=document.createElement("div"); row.className="mod-item";
+        const name=document.createElement("span"); name.textContent=mod.name;
+        const toggle=document.createElement("input"); toggle.type="checkbox"; toggle.checked=mod.enabled!==false;
+        toggle.addEventListener("change",()=>{mod.enabled=toggle.checked;saveSettings();applyMods();});
+        const remove=document.createElement("button"); remove.className="danger-btn"; remove.textContent="Remove";
+        remove.addEventListener("click",()=>{savedSettings.mods.splice(index,1);saveSettings();applyMods();renderMods();});
+        row.append(name,toggle,remove); list.appendChild(row);
+    });
+}
+function applyMods(){
+    let style=document.getElementById("schooly-user-mods"); if(!style){style=document.createElement("style");style.id="schooly-user-mods";document.head.appendChild(style);}
+    style.textContent=savedSettings.mods.filter(m=>m.enabled!==false).map(m=>m.css).join("\n");
+}
+document.getElementById("addModButton").addEventListener("click",()=>{
+    const name=document.getElementById("modName").value.trim() || "Unnamed mod";
+    const css=document.getElementById("modCss").value.trim();
+    if(!css) return;
+    savedSettings.mods.push({name,css,enabled:true}); saveSettings(); applyMods(); renderMods();
+    document.getElementById("modName").value=""; document.getElementById("modCss").value="";
+});
+
+document.getElementById("resetSettingsButton").addEventListener("click",()=>{
+    if(!confirm("Reset all Schooly settings?")) return;
+    localStorage.removeItem(SETTINGS_KEY); location.reload();
+});
+
+window.addEventListener("mousemove",e=>{customCursor.style.left=e.clientX+"px";customCursor.style.top=e.clientY+"px";});
+
+// Movable settings window
+let dragging=false, dragOffsetX=0, dragOffsetY=0;
+settingsTitlebar.addEventListener("mousedown",e=>{
+    if(e.target.closest("button")) return;
+    const rect=settingsWindow.getBoundingClientRect(); dragging=true; dragOffsetX=e.clientX-rect.left; dragOffsetY=e.clientY-rect.top;
+    settingsWindow.style.transform="none"; settingsWindow.style.left=rect.left+"px"; settingsWindow.style.top=rect.top+"px";
+});
+window.addEventListener("mousemove",e=>{
+    if(!dragging) return;
+    const maxX=window.innerWidth-settingsWindow.offsetWidth, maxY=window.innerHeight-settingsWindow.offsetHeight;
+    settingsWindow.style.left=Math.max(0,Math.min(maxX,e.clientX-dragOffsetX))+"px";
+    settingsWindow.style.top=Math.max(0,Math.min(maxY,e.clientY-dragOffsetY))+"px";
+});
+window.addEventListener("mouseup",()=>dragging=false);
+
+applyTheme(savedSettings.theme); applyCursor(savedSettings.cursor); applyBehavior(); applyMods();
+
+/* =========================================================
    PAGE SYSTEM
 ========================================================= */
 
@@ -2672,7 +3036,7 @@ const pages =
         ".page"
     );
 
-let currentPage = "home";
+let currentPage = savedSettings.rememberPage ? (localStorage.getItem("schoolyLastPage") || "home") : "home";
 
 function openPage(name){
 
@@ -2697,7 +3061,7 @@ function openPage(name){
 
     }
 
-    tabs.forEach(tab => {
+tabs.forEach(tab => {
 
         tab.classList.toggle(
             "active",
@@ -2707,6 +3071,7 @@ function openPage(name){
     });
 
     currentPage = name;
+    if(savedSettings.rememberPage) localStorage.setItem("schoolyLastPage", name);
 
 }
 
@@ -3088,7 +3453,14 @@ const SCHOOLY_GAMES = [
         description:"A mysterious horror game about a troubled family."
     },
 
-    {
+{
+        name:"Bad Piggies",
+        file:"clbadpiggieslatest.html",
+        icon:"https://tse4.mm.bing.net/th/id/OIP.Gghpm5TvUzCXO_RCsmAtoAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Build strange machines and help the pigs."
+    },
+
+{
         name:"Baldi's Basic Fun New School",
         file:"clbaldisfunnewschoolultimate.html",
         icon:"https://tse2.mm.bing.net/th/id/OIP.RqM00Xhq_6s2qvMIQfCiYwHaF3?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
@@ -3102,33 +3474,97 @@ const SCHOOLY_GAMES = [
         description:"Escape school while learning the basics from Baldi."
     },
 
-    {
+{
         name:"Baldi's Basics Decompile",
         file:"clbaldidecomp.html",
         icon:"https://tse1.mm.bing.net/th/id/OIP.7kqCV_Xf9wLASMXQlLAewwHaFj?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
         description:"An ultra decompile of Baldi's Basics."
     },
 
-    {
+{
+        name:"Banana Simulator",
+        file:"clbananasimulator.html",
+        icon:"https://tse3.mm.bing.net/th/id/OIP.OPIx39vrCEbv7wJjpVr9TwAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Click bananas, earn money, and hire workers."
+    },
+
+{
         name:"Bank Robbery 1",
         file:"clbankrobbery1.html",
         icon:"https://th.bing.com/th/id/OIP.6SxaUc0KdNG_86PJNLuP8QHaD4?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
         description:"Plan and survive a bank robbery."
     },
 
-    {
+{
         name:"Bank Robbery 2",
         file:"clbankrobbery2.html",
         icon:"https://th.bing.com/th/id/OIP.GcLpAWMPGp18xTUb1w1HsgHaEO?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
         description:"Take on another bank robbery challenge."
     },
 
-    {
+{
         name:"Bart Blast",
         file:"clbartblast.html",
         icon:"https://tse3.mm.bing.net/th/id/OIP.li81_NHsUuha5arRqojgRgHaEI?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
         description:"Blast through a fast-paced Bart adventure."
     },
+
+{
+        name:"Baseball Bros",
+        file:"clbaseballbros.html",
+        icon:"https://th.bing.com/th/id/OIP.dM4QW9nlzSorgZKYPx-kCgHaES?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Fast-paced baseball action."
+    },
+
+{
+        name:"Batter Up",
+        file:"clbatterup.html",
+        icon:"https://tse3.mm.bing.net/th/id/OIP.kaWXhdP8AwxscoeiZa7AUAHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Hit the ball and take on the challenge."
+    },
+
+{
+        name:"Battle Karts",
+        file:"clbattlekarts.html",
+        icon:"https://th.bing.com/th/id/OIP.DITHFfsskw0fL6iSfxkrBQAAAA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Race and battle in explosive kart matches."
+    },
+
+{
+        name:"Beach Boxing Sim",
+        file:"clbeachboxingsim.html",
+        icon:"https://th.bing.com/th/id/OIP.itlUEM_6tJW3Hx0cfho8UwHaD0?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Train and fight in a beach boxing simulator."
+    },
+
+{
+        name:"Bergentruck 201X",
+        file:"clbergentruck201x.html",
+        icon:"https://tse2.mm.bing.net/th/id/OIP.Yg7NoMYS--WGXPZ8dWhWyQAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Drive through a surreal world in Bergentruck 201X."
+    },
+
+{
+        name:"Big Flappy",
+        file:"clbigflappytowertinysquare.html",
+        icon:"https://th.bing.com/th/id/R.6b8f6342a68060ca2c3328a39445031f?rik=LOubXJzv7xBsMQ&riu=http%3a%2f%2fwww.coolmathgames.com%2fsites%2fdefault%2ffiles%2fBigFlappyTowerTinySquare_OG-logo.jpg&ehk=czIOIwlQfN7Ll49lLiMh2YRz%2fBFJCcaV41rf5TqBEvI%3d&risl=&pid=ImgRaw&r=0",
+        description:"Climb the Big Tower to rescue your pineapple."
+    },
+
+{
+        name:"Bio Evil 4",
+        file:"clbioevil4.html",
+        icon:"https://th.bing.com/th/id/OIP.kd5SCSVahO3Gkk7fq_nxvQHaEK?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"A challenging platform shooter."
+    },
+
+{
+        name:"Block Blast",
+        file:"clblockblast.html",
+        icon:"https://tse2.mm.bing.net/th/id/OIP.s5T-DLlxOevheC1bcZ4s5wHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+        description:"Clear blocks and chase a high score."
+    }
+
 ];
 
 
@@ -3478,6 +3914,10 @@ function openSchoolyGame(game){
 
         return;
 
+    }
+
+    if(savedSettings.gameConfirm && !confirm("Open " + game.name + "?")){
+        return;
     }
 
     currentSchoolyGame =
